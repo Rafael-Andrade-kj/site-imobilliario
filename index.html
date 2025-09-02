@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+     <div class="pre-hero">
+        <div class="hero">
+            <h1 id="hero-title">Encontre o lar perfeito com quem entende de imóveis</h1>
+            <p id="hero-description">O lar perfeito está mais perto do que você imagina. Seu próximo imóvel começa aqui. Imóveis selecionados de acordo com o seu perfil.</p>
+            <button id="hero-button">
+                <span>Ver imóveis</span>
+            </button>
+        </div>
+    </div>
+
+
+  <div class="container">
+        <div class="sub-hero">
+            <h2>Onde confiança e imóveis se encontram.</h2>
+        </div>
+        
+        <div class="cards">
+            <div class="card">
+                <div class="card-icon"> <img src="img/ChatGPT Image 27_08_2025, 19_47_55.png" alt="" width="15%"></div>
+                <div class="card-content">
+                    <h3>Avaliação Justa do Imóvel</h3>
+                    <p>Receba uma avaliação precisa do seu imóvel em questão de minutos com nossa 
+                    <a href="#">tecnologia avançada</a>.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon"> <img src="img/ChatGPT Image 27_08_2025, 19_51_38.png" alt="" width="15%"></div>
+                <div class="card-content">
+                    <h3>Atendimento Personalizado</h3>
+                    <p>Nossa equipe de especialistas oferece orientação personalizada para 
+                    <a href="#">compra</a> e <a href="#">venda</a> de imóveis.</p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-icon"><img src="img/ChatGPT Image 27_08_2025, 20_08_25.png" alt="" width="15%"></div>
+                <div class="card-content">
+                    <h3>Imóveis Exclusivos</h3>
+                    <p>Acesse nosso catálogo exclusivo com os melhores imóveis da região, 
+                    <a href="#">residenciais</a> e <a href="#">comerciais</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Função para detectar se o JavaScript está habilitado
+        document.body.classList.remove('js-preload');
+
+        // Verifica se a imagem de fundo já foi carregada
+        function preloadBackgroundImage() {
+            return new Promise((resolve) => {
+                const bgImage = new Image();
+                bgImage.src = 'lycs-architecture-kUdbEEMcRwE-unsplash.jpg';
+                
+                if (bgImage.complete) {
+                    resolve();
+                } else {
+                    bgImage.onload = resolve;
+                    bgImage.onerror = resolve; // Continua mesmo se a imagem falhar
+                }
+            });
+        }
+
+        // Aguarda o DOM estar pronto e a imagem de fundo carregar
+        document.addEventListener('DOMContentLoaded', () => {
+            preloadBackgroundImage().then(() => {
+                // Remove a classe de pré-carregamento após carregar a imagem
+                document.body.classList.remove('js-preload');
+                
+                // Inicia a animação após um pequeno delay para garantir renderização
+                setTimeout(initAnimations, 100);
+            });
+        });
+
+        function initAnimations() {
+            // Configuração inicial otimizada
+            gsap.set(["#hero-title", "#hero-description", "#hero-button"], {
+                opacity: 0,
+                y: 20
+            });
+
+            // Cria timeline com configurações otimizadas
+            const tl = gsap.timeline({
+                defaults: {
+                    ease: "power2.out",
+                    duration: 0.8
+                },
+                onStart: () => {
+                    // Força repaint para evitar flickering
+                    document.body.offsetHeight;
+                }
+            });
+
+            // Animação sequencial melhorada
+            tl.to("#hero-title", {
+                opacity: 1,
+                y: 0,
+                duration: 1.2
+            })
+            .to("#hero-description", {
+                opacity: 1,
+                y: 0,
+                duration: 0.9
+            }, "-=0.4") // Overlap de 0.4s com a animação anterior
+            .to("#hero-button", {
+                opacity: 1,
+                y: 0,
+                duration: 0.7,
+                ease: "back.out(1.6)"
+            }, "-=0.3"); // Overlap de 0.3s com a animação anterior
+
+            // Adiciona efeito de flutuação sutil após a animação principal
+            tl.to("#hero-button", {
+                y: -5,
+                repeat: -1,
+                yoyo: true,
+                duration: 2,
+                ease: "sine.inOut"
+            }, "+=0.5");
+        }
+
+        // Fallback para caso o JavaScript esteja desabilitado
+        // Os elementos já estão com opacidade 0 no CSS, então precisamos de um fallback
+        const style = document.createElement('style');
+        style.textContent = `
+            .no-js .hero h1,
+            .no-js .hero p,
+            .no-js .hero button {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Remove a classe no-js se JavaScript estiver habilitado
+        document.documentElement.classList.remove('no-js');
+    </script>
+
+    <!-- Fallback para caso o JavaScript esteja desabilitado -->
+    <noscript>
+        <style>
+            .hero h1,
+            .hero p,
+            .hero button {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
+    
+
+    
+
+  <script>
+        // Registrar o plugin ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animação do título principal
+        gsap.fromTo(".sub-hero", 
+            {
+                opacity: 0,
+                y: 50
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: ".sub-hero",
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        // Animação dos cards com stagger (um após o outro)
+        gsap.fromTo(".card",
+            {
+                opacity: 0,
+                y: 60
+            },
+            {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power2.out",
+                stagger: 0.2, // Delay de 0.2s entre cada card
+                scrollTrigger: {
+                    trigger: ".cards",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        // Animação dos ícones dos cards (aparecem com escala)
+        gsap.fromTo(".card-icon",
+            {
+                scale: 0,
+                rotation: -180
+            },
+            {
+                scale: 1,
+                rotation: 0,
+                duration: 0.6,
+                ease: "back.out(1.7)",
+                stagger: 0.15,
+                scrollTrigger: {
+                    trigger: ".cards",
+                    start: "top 85%",
+                    toggleActions: "play none none reverse"
+                }
+            }
+        );
+
+        // Animação sutil dos links ao hover
+        document.querySelectorAll('.card-content a').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                gsap.to(link, {
+                    scale: 1.05,
+                    duration: 0.2,
+                    ease: "power2.out"
+                });
+            });
+
+            link.addEventListener('mouseleave', () => {
+                gsap.to(link, {
+                    scale: 1,
+                    duration: 0.2,
+                    ease: "power2.out"
+                });
+            });
+        });
+
+        // Efeito parallax sutil no background do hero
+        gsap.to(".pre-hero", {
+            backgroundPosition: "50% 60%",
+            ease: "none",
+            scrollTrigger: {
+                trigger: ".pre-hero",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: true
+            }
+        });
+    </script>
+
+
+
+
+
+ <section class="catalog-section">
+        <div class="catalog-header">
+            <h2>Nosso Catalogo Exclusivo</h2>
+            <p>Descubra imóveis únicos cuidadosamente selecionados para você. Qualidade, localização e valor em cada propriedade.</p>
+        </div>
+
+        <!-- Primeira linha do marquee -->
+        <div class="marquee-container">
+            <div class="marquee-track" id="marquee1">
+                <!-- Card 1 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa Moderna">
+                        <div class="price-tag">R$ 850.000</div>
+                        <div class="property-type">Casa</div>
+                    </div>
+                    <div class="property-info">
+                        <h3 class="property-title">Casa Moderna Premium</h3>
+                        <div class="property-location">
+                            <span class="feature-icon">📍</span>
+                            Alphaville, Barueri - SP
+                        </div>
+                        <div class="property-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🛏</span>
+                                <span>4 Quartos</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🛁</span>
+                                <span>3 Banheiros</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📐</span>
+                                <span>320m²</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🚗</span>
+                                <span>2 Vagas</span>
+                            </div>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-status status-available">Disponível</span>
+                            <button class="view-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Apartamento Luxo">
+                        <div class="price-tag">R$ 1.200.000</div>
+                        <div class="property-type">Apartamento</div>
+                    </div>
+                    <div class="property-info">
+                        <h3 class="property-title">Cobertura Vista Mar</h3>
+                        <div class="property-location">
+                            <span class="feature-icon">📍</span>
+                            Copacabana, Rio de Janeiro - RJ
+                        </div>
+                        <div class="property-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🛏</span>
+                                <span>3 Quartos</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🛁</span>
+                                <span>2 Banheiros</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📐</span>
+                                <span>180m²</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🏊</span>
+                                <span>Piscina</span>
+                            </div>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-status status-available">Disponível</span>
+                            <button class="view-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Loft Industrial">
+                        <div class="price-tag">R$ 650.000</div>
+                        <div class="property-type">Loft</div>
+                    </div>
+                    <div class="property-info">
+                        <h3 class="property-title">Loft Industrial Chic</h3>
+                        <div class="property-location">
+                            <span class="feature-icon">📍</span>
+                            Vila Madalena, São Paulo - SP
+                        </div>
+                        <div class="property-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🛏</span>
+                                <span>2 Quartos</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🛁</span>
+                                <span>1 Banheiro</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📐</span>
+                                <span>95m²</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🎨</span>
+                                <span>Ateliê</span>
+                            </div>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-status status-sold">Vendido</span>
+                            <button class="view-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa Colonial">
+                        <div class="price-tag">R$ 1.500.000</div>
+                        <div class="property-type">Casa</div>
+                    </div>
+                    <div class="property-info">
+                        <h3 class="property-title">Casa Colonial Luxo</h3>
+                        <div class="property-location">
+                            <span class="feature-icon">📍</span>
+                            Jardins, São Paulo - SP
+                        </div>
+                        <div class="property-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🛏</span>
+                                <span>5 Quartos</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🛁</span>
+                                <span>4 Banheiros</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📐</span>
+                                <span>450m²</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🌳</span>
+                                <span>Jardim</span>
+                            </div>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-status status-available">Disponível</span>
+                            <button class="view-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="property-card">
+                    <div class="property-image">
+                        <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Casa Minimalista">
+                        <div class="price-tag">R$ 950.000</div>
+                        <div class="property-type">Casa</div>
+                    </div>
+                    <div class="property-info">
+                        <h3 class="property-title">Casa Minimalista</h3>
+                        <div class="property-location">
+                            <span class="feature-icon">📍</span>
+                            Barra da Tijuca, Rio de Janeiro - RJ
+                        </div>
+                        <div class="property-features">
+                            <div class="feature-item">
+                                <span class="feature-icon">🛏</span>
+                                <span>3 Quartos</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🛁</span>
+                                <span>2 Banheiros</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">📐</span>
+                                <span>280m²</span>
+                            </div>
+                            <div class="feature-item">
+                                <span class="feature-icon">🔥</span>
+                                <span>Lareira</span>
+                            </div>
+                        </div>
+                        <div class="property-footer">
+                            <span class="property-status status-available">Disponível</span>
+                            <button class="view-btn">Ver Detalhes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Duplica os cards para criar loop infinito suave
+        function duplicateCards() {
+            const marquees = document.querySelectorAll('.marquee-track');
+            
+            marquees.forEach(marquee => {
+                const cards = marquee.innerHTML;
+                marquee.innerHTML = cards + cards; // Duplica o conteúdo
+            });
+        }
+        
+        // Executa quando a página carrega
+        window.addEventListener('load', duplicateCards);
+    </script>
+
+
+
+<div class="sub-about">
+        <section class="about">
+            <div class="about-left">
+                <h1 class="animate-title">O ponto de partida para a sua nova vida.</h1>
+                <p class="subtitle animate-text">
+                    Encontre o lar ideal para viver seus melhores momentos.
+                    Com transparência, segurança e imóveis selecionados, ajudamos você a transformar sonhos em realidade.
+                </p>
+                <a href="#" class="cta-button animate-button">Quero meu novo lar</a>
+            </div>
+            <div class="about-right">
+                <img src="img/floris-bronkhorst-OLFA5DgSIFo-unsplash.jpg" alt="Casa moderna" class="animate-image">
+            </div>
+        </section>
+    </div>
+
+
+    <script>
+        // Registrar o plugin ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Animação do título principal
+        gsap.to(".animate-title", {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power3.out",
+            scrollTrigger: {
+                trigger: ".animate-title",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Animação do texto/subtítulo
+        gsap.to(".animate-text", {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            ease: "power2.out",
+            delay: 0.3,
+            scrollTrigger: {
+                trigger: ".animate-text",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Animação do botão CTA
+        gsap.to(".animate-button", {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            delay: 0.6,
+            scrollTrigger: {
+                trigger: ".animate-button",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Animação da imagem
+        gsap.to(".animate-image", {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.2,
+            scrollTrigger: {
+                trigger: ".animate-image",
+                start: "top 85%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Animação dos cards
+        gsap.to(".animate-card", {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: ".animate-card",
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Animação dos itens de feature (em sequência)
+        gsap.to(".animate-feature", {
+            opacity: 1,
+            y: 0,
+            rotateY: 0,
+            duration: 1,
+            ease: "power2.out",
+            stagger: 0.2, // Anima um por vez com 0.2s de intervalo
+            scrollTrigger: {
+                trigger: ".features-grid",
+                start: "top 80%",
+                end: "bottom 20%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Animação paralela mais avançada - Timeline
+        let tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".about",
+                start: "top 60%",
+                end: "bottom 30%",
+                toggleActions: "play none none reverse"
+            }
+        });
+
+        // Adiciona efeito de hover melhorado no botão
+        const button = document.querySelector('.cta-button');
+        
+        button.addEventListener('mouseenter', () => {
+            gsap.to(button, {
+                scale: 1.05,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+
+        button.addEventListener('mouseleave', () => {
+            gsap.to(button, {
+                scale: 1,
+                duration: 0.3,
+                ease: "power2.out"
+            });
+        });
+
+        // Efeito parallax sutil na imagem
+        gsap.to(".animate-image", {
+            y: -30,
+            scrollTrigger: {
+                trigger: ".about-right",
+                start: "top bottom",
+                end: "bottom top",
+                scrub: 1 // Suave movimento baseado no scroll
+            }
+        });
+
+        // Refresh ScrollTrigger após carregar (importante!)
+        ScrollTrigger.refresh();
+    </script>
+
+
+<div class="testimonial-body">
+        <!-- Cabeçalho da seção -->
+        <div class="testimonial-header">
+            <h2 class="testimonial-title">Clientes Felizes</h2>
+            <p class="testimonial-description">
+                Veja o que nossos clientes dizem sobre a experiência de encontrar o lar dos sonhos conosco. 
+                
+            </p>
+        </div>
+
+        <div class="testimonial-container">
+            <div class="slide-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">4</span>
+            </div>
+
+            <div class="testimonial-slides-wrapper">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-text">
+                        "Encontramos nossa casa dos sonhos graças ao atendimento excepcional desta imobiliária. 
+                        Profissionais competentes, processo transparente e suporte em cada etapa. Recomendamos!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+                             alt="Carlos Silva" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Carlos Silva</div>
+                            <div class="author-title">Empresário - Apartamento Leblon</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">
+                        "Vendemos nosso imóvel rapidamente e pelo melhor preço. A equipe é super dedicada e 
+                        nos manteve informados durante todo o processo. Experiência incrível!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+                             alt="Ana Santos" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Ana Santos</div>
+                            <div class="author-title">Médica - Casa em Ipanema</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">
+                        "Como investidor, preciso de agilidade e transparência. Esta imobiliária superou 
+                        minhas expectativas em todos os aspectos. Já fechei 3 negócios com eles."
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+                             alt="Roberto Lima" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Roberto Lima</div>
+                            <div class="author-title">Investidor - Portfólio Barra</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">
+                        "Alugamos nosso primeiro apartamento através deles. Processo simples, sem burocracias 
+                        desnecessárias e encontramos exatamente o que queríamos. Muito satisfeitos!"
+                    </p>
+                    <div class="testimonial-author">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face"
+                             alt="Marina Costa" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Marina Costa</div>
+                            <div class="author-title">Designer - Apartamento Copacabana</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-indicators">
+                <span class="indicator active" data-slide="0"></span>
+                <span class="indicator" data-slide="1"></span>
+                <span class="indicator" data-slide="2"></span>
+                <span class="indicator" data-slide="3"></span>
+            </div>
+
+           
+        </div>
+    </div>
+
+
+    <script>
+        class TestimonialSlider {
+            constructor() {
+                this.currentSlide = 0;
+                this.slides = document.querySelectorAll('.testimonial-slide');
+                this.indicators = document.querySelectorAll('.indicator');
+                this.totalSlides = this.slides.length;
+                this.slideInterval = null;
+                this.isTransitioning = false;
+
+                this.init();
+            }
+
+            init() {
+                this.updateCounter();
+                this.bindEvents();
+                this.startSlideshow();
+            }
+
+            showSlide(index, skipTransition = false) {
+                if (this.isTransitioning && !skipTransition) return;
+                
+                this.isTransitioning = true;
+                
+                // Remove active class from all
+                this.slides.forEach(slide => slide.classList.remove('active'));
+                this.indicators.forEach(indicator => indicator.classList.remove('active'));
+
+                // Add active class to current
+                this.slides[index].classList.add('active');
+                this.indicators[index].classList.add('active');
+                
+                this.currentSlide = index;
+                this.updateCounter();
+
+                // Reset transition lock after animation
+                setTimeout(() => {
+                    this.isTransitioning = false;
+                }, 500);
+            }
+
+            nextSlide() {
+                const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+                this.showSlide(nextIndex);
+            }
+
+            prevSlide() {
+                const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.showSlide(prevIndex);
+            }
+
+            goToSlide(index) {
+                if (index !== this.currentSlide) {
+                    this.showSlide(index);
+                    this.restartSlideshow();
+                }
+            }
+
+            startSlideshow() {
+                this.slideInterval = setInterval(() => {
+                    this.nextSlide();
+                }, 12000); // 6 segundos para dar mais tempo de leitura
+            }
+
+            stopSlideshow() {
+                if (this.slideInterval) {
+                    clearInterval(this.slideInterval);
+                    this.slideInterval = null;
+                }
+            }
+
+            restartSlideshow() {
+                this.stopSlideshow();
+                this.startSlideshow();
+            }
+
+            updateCounter() {
+                document.getElementById('current-slide').textContent = this.currentSlide + 1;
+                document.getElementById('total-slides').textContent = this.totalSlides;
+            }
+
+            bindEvents() {
+                // Indicators
+                this.indicators.forEach((indicator, index) => {
+                    indicator.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        this.goToSlide(index);
+                    });
+                });
+
+                // Navigation buttons
+                document.getElementById('prev-btn').addEventListener('click', () => {
+                    this.prevSlide();
+                    this.restartSlideshow();
+                });
+
+                document.getElementById('next-btn').addEventListener('click', () => {
+                    this.nextSlide();
+                    this.restartSlideshow();
+                });
+
+                // Pause/Resume on hover
+                const container = document.querySelector('.testimonial-container');
+                container.addEventListener('mouseenter', () => this.stopSlideshow());
+                container.addEventListener('mouseleave', () => this.startSlideshow());
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') {
+                        this.prevSlide();
+                        this.restartSlideshow();
+                    } else if (e.key === 'ArrowRight') {
+                        this.nextSlide();
+                        this.restartSlideshow();
+                    }
+                });
+
+                // Touch/Swipe support (básico)
+                let startX = 0;
+                container.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                });
+
+                container.addEventListener('touchend', (e) => {
+                    if (!startX) return;
+                    
+                    const endX = e.changedTouches[0].clientX;
+                    const diffX = startX - endX;
+
+                    if (Math.abs(diffX) > 50) { // Mínimo de 50px para considerar swipe
+                        if (diffX > 0) {
+                            this.nextSlide();
+                        } else {
+                            this.prevSlide();
+                        }
+                        this.restartSlideshow();
+                    }
+                    startX = 0;
+                });
+            }
+        }
+
+        // Initialize slider when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new TestimonialSlider();
+        });
+    </script>
+
+
+ <div class="section-bg">
+        <div class="faq-container">
+            <div class="header">
+                <h1>Perguntas Frequentes</h1>
+                <p>Encontre respostas para as dúvidas mais comuns sobre compra, venda e locação de imóveis.</p>
+            </div> 
+
+            <div class="faq-container2">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="question-text">Como funciona o processo de compra de um imóvel?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>O processo de compra é simples e seguro. Primeiro, você escolhe o imóvel de interesse e fazemos uma visita para conhecer todos os detalhes.</p>
+                            <p>Em seguida, auxiliamos na negociação do valor, análise de documentação, financiamento (se necessário) e acompanhamos toda a parte legal até a escritura definitiva.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="question-text">Quais documentos preciso para alugar um imóvel?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Para locação, você precisará de: RG, CPF, comprovante de renda (últimos 3 contracheques), comprovante de residência e referências pessoais.</p>
+                            <p>Também será necessário apresentar fiador com documentos similares ou optar por seguro fiança/caução. Nossa equipe orienta sobre a melhor opção para seu perfil.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="question-text">Quanto tempo demora para vender meu imóvel?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>O prazo de venda varia conforme localização, condições do imóvel e preço praticado. Em média, imóveis bem posicionados vendem entre 60 a 120 dias.</p>
+                            <p>Nossa estratégia de marketing digital, fotografias profissionais e rede de contatos acelera significativamente esse processo, sempre buscando o melhor valor de mercado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="question-text">Vocês auxiliam com financiamento imobiliário?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Sim! Temos parceria com diversos bancos e correspondentes bancários para conseguir as melhores condições de financiamento para nossos clientes.</p>
+                            <p>Auxiliamos desde a simulação inicial, análise de perfil, até o acompanhamento completo do processo junto ao banco escolhido. Tudo sem custo adicional.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="question-text">Qual a diferença entre exclusividade e captação aberta?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p><strong>Exclusividade:</strong> Apenas nossa imobiliária comercializa seu imóvel, garantindo foco total, marketing profissional e negociação mais eficiente.</p>
+                            <p><strong>Captação aberta:</strong> Outras imobiliárias também podem vender, mas isso pode gerar confusão de preços e informações. Recomendamos sempre a exclusividade para melhores resultados.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span class="question-text">Há taxa de corretagem? Como funciona?</span>
+                        <span class="faq-icon">▼</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div class="answer-content">
+                            <p>Sim, cobramos taxa de corretagem conforme tabela CRECI. Para compras, o valor é de 6% sobre o valor do imóvel, dividido entre comprador e vendedor.</p>
+                            <p>Para locações, cobramos o equivalente a 1 aluguel como taxa de corretagem. Todos os valores são transparentes e informados antes de qualquer negociação.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', function() {
+                    const faqItem = this.closest('.faq-item');
+                    const isActive = faqItem.classList.contains('active');
+                    
+                    // Fechar todos os outros itens
+                    document.querySelectorAll('.faq-item').forEach(item => {
+                        item.classList.remove('active');
+                    });
+                    
+                    // Abrir o item clicado se não estava ativo
+                    if (!isActive) {
+                        faqItem.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+
+
+<div class="footer-body">
+<div class="main-content">
+        <div class="hero-section">
+            <h1 class="hero-title2">O próximo capítulo da sua vida começa aqui.</h1>
+            <a href="#demo" class="cta-button2">Agende uma visita</a>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Overview</h3>
+                <ul>
+                    <li><a href="#product">Product</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#security">Security</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#terms">Terms of Use</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#demo">Request Demo</a></li>
+                    <li><a href="mailto:contact@financialai.com">Email</a></li>
+                    <li><a href="#linkedin">LinkedIn</a></li>
+                    <li><a href="#twitter">X / Twitter</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</div>
+    
+</body>
+</html>
